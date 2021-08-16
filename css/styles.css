@@ -5,6 +5,7 @@
   --accent-color: #2196F3;
   --background-light-color: #F5F4FA;
   --background-dark-color: #2F303A;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 h1, h2, h3, p, ul {
@@ -87,6 +88,9 @@ body {
   padding-top: 32px;
   padding-bottom: 32px;
   color: var(--title-link-color);
+
+  transition: color 250ms var(--transition-timing);
+
   font-weight: 500;
   font-size: 14px;
   line-height: 1.14;
@@ -99,6 +103,7 @@ body {
  {
   color: var(--accent-color);
 }
+
 .current {
   position: relative;
 }
@@ -110,7 +115,7 @@ body {
   bottom: 0;
   width: 100%;
   height: 4px;
-  background-color: #2196F3;
+  background-color: var(--accent-color);
   border-radius: 2px;
 }
 
@@ -153,14 +158,16 @@ margin-left: 50px;
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
-  }
+  cursor: pointer;
 
+  transition: color 250ms var(--transition-timing), 
+  fill 250ms var(--transition-timing);
+  }
 
 .contacts-link:hover,
 .contacts-link:focus {
     color: var(--accent-color);
     fill: var(--accent-color);
-  cursor: pointer;
   }
 
 .icon-header {
@@ -382,6 +389,8 @@ margin-left: 50px;
   width: 44px;
   height: 44px;
   border-radius: 50%;
+  background-color: #FFFFFF;
+  transition: background-color 250ms var(--transition-timing);
 }
 
 .social-list-item:not(:last-child) {
@@ -390,6 +399,7 @@ margin-left: 50px;
 
 .social-list-link .icon {
   fill: #AFB1B8;
+  transition: fill 250ms var(--transition-timing);
 }
 
 .social-list-link:hover,
@@ -419,6 +429,8 @@ margin-left: 50px;
   height: 92px;
   border: 1px solid #AFB1B8;
   border-radius: 4px;
+
+  transition: border 250ms var(--transition-timing);
 }
 
 .regular-customers-item:not(:last-child) {
@@ -441,6 +453,8 @@ margin-left: 50px;
   width: 106px;
   height: 60px;
   fill: #AFB1B8;
+
+  transition: fill 250ms var(--transition-timing);
 }
 
 /*portfolio filter*/
@@ -464,6 +478,11 @@ margin-left: 50px;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.62;
+
+  transition: background-color 250ms var(--transition-timing), 
+  color 250ms var(--transition-timing),
+  box-shadow 250ms var(--transition-timing);
+
   cursor: pointer;
   text-decoration: none;
 }
@@ -494,6 +513,33 @@ margin-left: 50px;
   margin-bottom: 30px;
 }
 
+.item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33, 150, 243, 0.9);
+  color: white;
+  padding: 63px 24px;
+
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 250ms var(--transition-timing),
+  opacity 250ms var(--transition-timing),
+  box-shadow 250ms var(--transition-timing);
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+}
+
+.clients-picture-block {
+  position: relative;
+  overflow: hidden;
+}
+
 .clients-list > .item:nth-child(3n) {
   margin-right: 0;
 }
@@ -507,6 +553,9 @@ margin-left: 50px;
   text-decoration: none;
   margin-top: 0;
   margin-bottom: 0;
+
+  transition: box-shadow 250ms var(--transition-timing);
+
 }
 
 .clients-list-link:hover,
@@ -517,6 +566,13 @@ margin-left: 50px;
   1px 4px 6px rgba(0, 0, 0, 0.16);
   cursor: pointer;
 }
+
+.clients-list-link:hover .item-overlay,
+.clients-list-link:focus .item-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
 
 .clients-list-desc {
   width: 370px;
@@ -643,3 +699,54 @@ margin-left: 50px;
 .footer-phone:focus {
   color: var(--accent-color);
 }
+
+/*backdrop*/
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transition: opacity 250ms var(--transition-timing),
+  visibility 250ms var(--transition-timing);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.backdrop-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 528px;
+  height: 581px;
+  background-color: #FFFFFF;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0 0;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
