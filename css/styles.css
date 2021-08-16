@@ -713,8 +713,10 @@ margin-left: 50px;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transform: scale(1);
 
-  transition: opacity 250ms var(--transition-timing),
+  transition: transform 250ms var(--transition-timing),
+  opacity 250ms var(--transition-timing),
   visibility 250ms var(--transition-timing);
 }
 
@@ -722,6 +724,7 @@ margin-left: 50px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transform: scale(0);
 }
 
 .backdrop-modal {
